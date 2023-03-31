@@ -452,7 +452,7 @@ class AsyncServer(server.Server):
         sid = None
         if namespace in self.handlers or namespace in self.namespace_handlers \
                 or self.namespaces == '*' or namespace in self.namespaces:
-            sid = self.manager.connect(eio_sid, namespace)
+            sid = await self.manager.connect(eio_sid, namespace)
         if sid is None:
             await self._send_packet(eio_sid, self.packet_class(
                 packet.CONNECT_ERROR, data='Unable to connect',
